@@ -55,9 +55,17 @@ export const Layout = () => {
       />
 
       {/* === Контент === */}
-      <Box sx={{ position: 'relative', zIndex: 3 }}>
+      <Box
+        sx={{
+          position: 'relative',
+          zIndex: 3,
+          maxWidth: 1055,
+          mx: 'auto',
+          width: '100%',
+        }}
+      >
         <Header />
-        <Container sx={{ mt: 4 }}>
+        <Container sx={{ mt: 4 }} disableGutters>
           <Outlet />
         </Container>
       </Box>
