@@ -1,7 +1,8 @@
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack } from '@mui/material';
 import './home.scss';
 import { DonationCard } from '@/widgets/donation';
 import { Expenses } from '@/widgets/expenses';
+import { Payment } from '@/widgets/payment';
 
 export const Home = () => {
   return (
@@ -21,17 +22,11 @@ export const Home = () => {
       <Grid size={4}>
         <Box
           sx={{
-            p: 3,
-            borderRadius: 2,
-            background: 'rgba(255,255,255,0.1)',
             position: 'sticky',
             top: 20,
           }}
         >
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            Правая колонка (фиксируется)
-          </Typography>
-          <Typography>Эта колонка остаётся видимой при прокрутке левого контента.</Typography>
+          <Payment />
         </Box>
       </Grid>
     </Grid>
