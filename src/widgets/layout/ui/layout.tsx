@@ -8,7 +8,6 @@ export const Layout = () => {
       sx={{
         position: 'relative',
         minHeight: '100vh',
-        overflow: 'hidden',
         px: 2,
         color: '#f8fafc',
         backgroundColor: '#0a0f1a',
@@ -62,6 +61,7 @@ export const Layout = () => {
           maxWidth: 1055,
           mx: 'auto',
           width: '100%',
+          py: 2,
         }}
       >
         <Header />

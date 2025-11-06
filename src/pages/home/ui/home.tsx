@@ -5,7 +5,7 @@ import { Expenses } from '@/widgets/expenses';
 
 export const Home = () => {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} sx={{ overflow: 'unset' }}>
       <Grid size={8}>
         <Stack spacing={2}>
           <DonationCard

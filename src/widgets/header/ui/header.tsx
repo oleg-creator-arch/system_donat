@@ -7,7 +7,6 @@ export const Header = () => {
       sx={{
         background: 'rgba(255, 255, 255, 0.1)',
         borderRadius: '10px',
-        my: 2,
         maxWidth: 1055,
         width: '100%',
         mx: 'auto',
