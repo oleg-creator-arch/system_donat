@@ -41,8 +41,15 @@ export const DonationCard = ({
       </Typography>
 
       {/* Цель */}
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          mb: 1,
+        }}
+      >
         <Chip label="ЦЕЛЬ на месяц" color="success" size="small" sx={{ mr: 1, fontWeight: 600 }} />
+
         <Typography variant="body1" sx={{ fontWeight: 600 }}>
           {goal.toLocaleString()} {currency}
         </Typography>
