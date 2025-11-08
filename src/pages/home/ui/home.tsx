@@ -7,7 +7,7 @@ import { Payment } from '@/widgets/payment';
 export const Home = () => {
   return (
     <Grid container spacing={2} sx={{ overflow: 'unset' }}>
-      <Grid size={8}>
+      <Grid size={{ xs: 12, md: 7 }}>
         <Stack spacing={2}>
           <DonationCard
             title="Ежемесячное обслуживание мечети «Ихляс»"
@@ -17,9 +17,16 @@ export const Home = () => {
             reference="Хадис передал ат-Тирмизи"
           />
           <Expenses />
+          <Expenses />
+          <Expenses />
+          <Expenses />
+          <Expenses />
+          <Expenses />
+          <Expenses />
+          <Expenses />
         </Stack>
       </Grid>
-      <Grid size={4}>
+      <Grid size={{ xs: 12, md: 5 }}>
         <Box
           sx={{
             position: 'sticky',

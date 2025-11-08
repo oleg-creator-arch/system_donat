@@ -93,16 +93,29 @@ export const Payment = () => {
         </Typography>
 
         {/* Варианты оплаты */}
-        <Grid container spacing={2} sx={{ mb: 3, maxWidth: '263px', minWidth: '200px' }}>
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            mb: 3,
+            maxWidth: { md: '500px', xs: '100%' }, // чтобы плитки не растягивались слишком
+            flexDirection: 'row',
+            justifyContent: { xs: 'center', md: 'flex-start' },
+          }}
+        >
           {paymentMethods.map(method => (
-            <Grid size={6} key={method.id}>
+            <Grid key={method.id} size={{ xs: 12, md: 6 }}>
               <Box
                 onClick={() => setSelected(method.id)}
                 sx={{
                   cursor: 'pointer',
                   textAlign: 'center',
-                  hyphens: 'none',
-                  p: 2,
+                  display: 'flex',
+                  flexDirection: { xs: 'row', md: 'column' }, // 📱 иконка+текст в линию, 💻 плитка
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: { xs: 1, md: 0 },
+                  p: { xs: 1, md: 2 },
                   borderRadius: 2,
                   background:
                     selected === method.id
@@ -118,14 +131,23 @@ export const Payment = () => {
                   },
                 }}
               >
-                <img
+                <Box
+                  component="img"
                   src={method.icon}
                   alt={method.label}
-                  width={40}
-                  height={40}
-                  style={{ marginBottom: 8 }}
+                  sx={{
+                    width: 40,
+                    height: 40,
+                    mb: { md: 1, xs: 0 },
+                  }}
                 />
-                <Typography fontWeight={500}>{method.label}</Typography>
+                <Typography
+                  fontWeight={500}
+                  fontSize={{ xs: '0.9rem', md: '1rem' }}
+                  sx={{ whiteSpace: 'nowrap' }}
+                >
+                  {method.label}
+                </Typography>
               </Box>
             </Grid>
           ))}
