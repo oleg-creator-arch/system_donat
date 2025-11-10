@@ -104,7 +104,7 @@ export const Payment = () => {
           }}
         >
           {paymentMethods.map(method => (
-            <Grid key={method.id} size={{ xs: 12, md: 6 }}>
+            <Grid key={method.id} size={{ xs: 12, sm: 6, md: 6 }}>
               <Box
                 onClick={() => setSelected(method.id)}
                 sx={{

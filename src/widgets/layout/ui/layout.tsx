@@ -65,7 +65,12 @@ export const Layout = () => {
         }}
       >
         <Header />
-        <Container sx={{ mt: 4 }} disableGutters>
+        <Container
+          sx={{
+            mt: 4,
+          }}
+          disableGutters
+        >
           <Outlet />
         </Container>
       </Box>
