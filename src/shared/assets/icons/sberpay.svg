@@ -1,0 +1,46 @@
+<svg viewBox="0 0 58.5628 58.5626" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58.562805" height="58.562592" fill="none" customFrame="#000000">
+	<defs>
+		<linearGradient id="paint_linear_0" x1="7.87519073" x2="5.17678452" y1="49.1754684" y2="27.8064175" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(242,233,19)" offset="0.144400001" stop-opacity="1" />
+			<stop stop-color="rgb(231,229,24)" offset="0.3037" stop-opacity="1" />
+			<stop stop-color="rgb(202,219,38)" offset="0.582300007" stop-opacity="1" />
+			<stop stop-color="rgb(163,205,57)" offset="0.890999973" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_1" x1="10.4933891" x2="29.5317554" y1="7.86014795" y2="5.21203327" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(15,168,224)" offset="0.0592" stop-opacity="1" />
+			<stop stop-color="rgb(0,153,249)" offset="0.538500011" stop-opacity="1" />
+			<stop stop-color="rgb(2,145,235)" offset="0.923399985" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_2" x1="27.3594856" x2="48.8883514" y1="52.8304214" y2="51.0544739" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(163,205,57)" offset="0.122599997" stop-opacity="1" />
+			<stop stop-color="rgb(134,195,57)" offset="0.28459999" stop-opacity="1" />
+			<stop stop-color="rgb(33,160,56)" offset="0.869300008" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_3" x1="27.853447" x2="46.2610016" y1="4.31761789" y2="6.24861956" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(2,145,235)" offset="0.0566000007" stop-opacity="1" />
+			<stop stop-color="rgb(12,138,203)" offset="0.790000021" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_4" x1="9.24974442" x2="29.2863007" y1="50.0384598" y2="53.244278" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(242,233,19)" offset="0.132400006" stop-opacity="1" />
+			<stop stop-color="rgb(235,231,22)" offset="0.297699988" stop-opacity="1" />
+			<stop stop-color="rgb(217,224,31)" offset="0.530600011" stop-opacity="1" />
+			<stop stop-color="rgb(187,214,45)" offset="0.802299976" stop-opacity="1" />
+			<stop stop-color="rgb(163,205,57)" offset="0.982900023" stop-opacity="1" />
+		</linearGradient>
+		<linearGradient id="paint_linear_5" x1="5.13090324" x2="8.57386112" y1="30.1333981" y2="9.21102142" gradientUnits="userSpaceOnUse">
+			<stop stop-color="rgb(163,205,57)" offset="0.0697999969" stop-opacity="1" />
+			<stop stop-color="rgb(129,197,95)" offset="0.259900004" stop-opacity="1" />
+			<stop stop-color="rgb(15,168,224)" offset="0.921599984" stop-opacity="1" />
+		</linearGradient>
+	</defs>
+	<g id="Сочетание 4">
+		<path id="Форма 2" d="M52.4478 11.4219C53.8326 13.2105 54.9865 15.1723 55.9674 17.2494L29.3104 36.9244L18.1174 29.8852L18.1174 21.4613L29.2534 28.4428L52.4478 11.4219Z" fill="rgb(33,160,56)" fill-rule="nonzero" />
+		<path id="Форма 3" d="M6.75082 29.3019C6.75082 28.898 6.75082 28.5518 6.80853 28.1479L0.0578318 27.8018C0.0578318 28.2634 0.00012207 28.7827 0.00012207 29.2442C0.00012207 37.322 3.28892 44.6492 8.59712 49.9582L13.386 45.1692C9.28942 41.1303 6.75072 35.5336 6.75072 29.3022L6.75082 29.3019Z" fill="url(#paint_linear_0)" fill-rule="nonzero" />
+		<path id="Форма 4" d="M29.2528 6.80188C29.6567 6.80188 30.0029 6.80188 30.4068 6.85958L30.753 0.108878C30.2914 0.108878 29.7721 0.051178 29.3105 0.051178C21.2328 0.051178 13.9055 3.33998 8.5965 8.64818L13.3854 13.4371C17.4243 9.34048 23.0787 6.80178 29.2524 6.80178L29.2528 6.80188Z" fill="url(#paint_linear_1)" fill-rule="nonzero" />
+		<path id="Форма 5" d="M29.2528 51.8119C28.8489 51.8119 28.5027 51.8119 28.0988 51.7542L27.7526 58.5049C28.2142 58.5049 28.7335 58.5626 29.1951 58.5626C37.2728 58.5626 44.6001 55.2738 49.9091 49.9656L45.1202 45.1766C41.0813 49.3309 35.4846 51.8119 29.2532 51.8119L29.2528 51.8119Z" fill="url(#paint_linear_2)" fill-rule="nonzero" />
+		<path id="Форма 6" d="M41.9468 10.7319L47.6589 6.5199C42.6392 2.4811 36.2349 0 29.2529 0L29.2529 6.7507C33.9841 6.8084 38.3692 8.2509 41.9469 10.7319L41.9468 10.7319Z" fill="url(#paint_linear_3)" fill-rule="nonzero" />
+		<path id="Форма 7" d="M58.5628 29.3019C58.5628 27.5133 58.3897 25.7823 58.1012 24.0514L51.8121 28.725L51.8121 29.302C51.8121 35.9373 48.9272 41.88 44.369 45.977L48.9272 50.9968C54.8124 45.6886 58.5628 37.8998 58.5628 29.3018L58.5628 29.3019Z" fill="rgb(33,160,56)" fill-rule="nonzero" />
+		<path id="Форма 8" d="M29.2528 51.8119C22.6175 51.8119 16.6748 48.927 12.5778 44.3688L7.55811 48.927C12.924 54.8699 20.6551 58.5626 29.2531 58.5626L29.2528 51.8119Z" fill="url(#paint_linear_4)" fill-rule="nonzero" />
+		<path id="Форма 9" d="M14.1938 12.6319L9.6356 7.61209C3.6927 12.978 0 20.7091 0 29.3061L6.7507 29.3061C6.7507 22.7285 9.6356 16.7281 14.1938 12.6311L14.1938 12.6319Z" fill="url(#paint_linear_5)" fill-rule="nonzero" />
+	</g>
+</svg>
