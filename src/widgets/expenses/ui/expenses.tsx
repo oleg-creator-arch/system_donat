@@ -66,8 +66,8 @@ export const Expenses = () => {
               <TableCell
                 sx={{
                   color: '#ffffff',
-                  wordBreak: 'normal', // слова не ломаются
-                  overflowWrap: 'break-word', // перенос по словам, если не помещается
+                  wordBreak: 'normal',
+                  overflowWrap: 'break-word',
                 }}
               >
                 {row.item}

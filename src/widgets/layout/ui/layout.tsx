@@ -35,7 +35,7 @@ export const Layout = () => {
           },
           zIndex: 0,
           opacity: 0.9,
-          willChange: 'background-position', // GPU hint
+          willChange: 'background-position',
         }}
       />
 

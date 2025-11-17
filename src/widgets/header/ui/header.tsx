@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography, Box, Button, useMediaQuery } from '@mui/ma
 import { useTheme } from '@mui/material/styles';
 
 interface HeaderProps {
-  onHelpClick?: () => void; // функция скролла к Payment
+  onHelpClick?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onHelpClick }) => {

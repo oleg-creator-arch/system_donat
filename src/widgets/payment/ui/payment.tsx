@@ -18,7 +18,6 @@ export const Payment = () => {
   const [amount, setAmount] = useState('');
   const [isError, setIsError] = useState(false);
 
-  // Проверка суммы
   const validateAmount = (value: string) => {
     const num = Number(value.replace(/\s|₽/g, ''));
     if (!num || num < 10) {
@@ -28,9 +27,8 @@ export const Payment = () => {
     }
   };
 
-  // Обработка изменения значения
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value.replace(/[^\d]/g, ''); // только цифры
+    const inputValue = e.target.value.replace(/[^\d]/g, '');
     if (inputValue === '') {
       setAmount('');
       setIsError(true);
@@ -38,12 +36,11 @@ export const Payment = () => {
     }
 
     const num = Number(inputValue);
-    const formatted = num.toLocaleString('ru-RU'); // добавляем пробелы между тысячами
+    const formatted = num.toLocaleString('ru-RU');
     setAmount(`${formatted} ₽`);
     validateAmount(formatted);
   };
 
-  // Разрешаем Backspace (очистку поля)
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace') {
       const digits = amount.replace(/[^\d]/g, '').slice(0, -1);
@@ -93,7 +90,7 @@ export const Payment = () => {
           spacing={2}
           sx={{
             mb: 3,
-            maxWidth: { md: '500px', xs: '100%' }, // чтобы плитки не растягивались слишком
+            maxWidth: { md: '500px', xs: '100%' },
             flexDirection: 'row',
             justifyContent: { xs: 'center', md: 'flex-start' },
           }}
@@ -106,7 +103,7 @@ export const Payment = () => {
                   cursor: 'pointer',
                   textAlign: 'center',
                   display: 'flex',
-                  flexDirection: { xs: 'row', md: 'column' }, // 📱 иконка+текст в линию, 💻 плитка
+                  flexDirection: { xs: 'row', md: 'column' },
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: { xs: 1, md: 0 },
@@ -160,22 +157,19 @@ export const Payment = () => {
           error={isError}
           helperText={isError ? 'от 10 ₽' : ''}
           sx={{
-            // Текст внутри input
             '& input': {
               color: isError ? '#f44336' : amount ? '#fff' : '#4caf50',
               fontWeight: 500,
             },
-            // Label
             '& label': {
               color: isError ? '#f44336' : amount ? '#fff' : '#4caf50',
             },
             '& label.Mui-focused': {
-              color: isError ? '#f44336' : '#4caf50', // зеленый при фокусе
+              color: isError ? '#f44336' : '#4caf50',
             },
             '& label.Mui-error': {
-              color: '#f44336', // красный при ошибке
+              color: '#f44336',
             },
-            // Нижняя линия
             '& .MuiInput-underline:before': {
               borderBottomColor: isError ? '#f44336' : amount ? '#fff' : '#4caf50',
             },
@@ -183,7 +177,7 @@ export const Payment = () => {
               borderBottomColor: isError ? '#f44336' : amount ? '#fff' : '#4caf50',
             },
             '& .MuiInput-underline:after': {
-              borderBottomColor: isError ? '#f44336' : '#4caf50', // зеленый при фокусе
+              borderBottomColor: isError ? '#f44336' : '#4caf50',
             },
           }}
         />

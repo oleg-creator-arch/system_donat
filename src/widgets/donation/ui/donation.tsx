@@ -72,7 +72,7 @@ export const DonationCard = ({
             backgroundColor: 'rgba(255,255,255,0.1)',
             '& .MuiLinearProgress-bar': {
               borderRadius: 8,
-              background: 'linear-gradient(90deg, #b0fdcc, #4ade80)', // градиент от зелёного к синему
+              background: 'linear-gradient(90deg, #b0fdcc, #4ade80)',
             },
           }}
         />
