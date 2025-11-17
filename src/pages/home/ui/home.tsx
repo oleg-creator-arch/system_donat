@@ -16,7 +16,6 @@ export const Home = () => {
 
   return (
     <Grid container spacing={2} sx={{ overflow: 'unset' }}>
-      {/* Левая колонка на десктопе */}
       <Grid size={{ xs: 12, md: 7 }}>
         <Stack spacing={2}>
           <DonationCard
@@ -27,22 +26,16 @@ export const Home = () => {
             reference="Хадис передал ат-Тирмизи"
           />
 
-          {/* На мобильных сразу Payment */}
           {isMobile && (
             <Box ref={paymentRef}>
               <Payment />
             </Box>
           )}
 
-          {/* Expenses идут после DonationCard на десктопе и после Payment на мобиле */}
-          <Expenses />
-          <Expenses />
-          <Expenses />
           <Expenses />
         </Stack>
       </Grid>
 
-      {/* Правая колонка на десктопе */}
       {!isMobile && (
         <Grid size={{ xs: 12, md: 5 }}>
           <Box

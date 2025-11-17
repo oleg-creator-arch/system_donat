@@ -35,12 +35,10 @@ export const DonationCard = ({
         },
       }}
     >
-      {/* Заголовок */}
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
         {title}
       </Typography>
 
-      {/* Цель */}
       <Box
         sx={{
           display: 'flex',
@@ -55,14 +53,11 @@ export const DonationCard = ({
         </Typography>
       </Box>
 
-      {/* Остаток */}
       <Typography variant="h4" sx={{ fontWeight: 700, color: '#4ade80', mb: 2 }}>
         {goal - collected} {currency} Осталось собрать
       </Typography>
 
-      {/* Прогресс-бар */}
       <Box sx={{ position: 'relative', width: '100%', mt: 2 }}>
-        {/* Полоска прогресса */}
         <LinearProgress
           variant="determinate"
           value={progress}
@@ -77,7 +72,6 @@ export const DonationCard = ({
           }}
         />
 
-        {/* Круг с процентом */}
         <Box
           sx={{
             position: 'absolute',
@@ -108,7 +102,6 @@ export const DonationCard = ({
         </Box>
       </Box>
 
-      {/* Суммы */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
         <Typography variant="body2" sx={{ fontWeight: 600 }}>
           {collected.toLocaleString()} {currency}
@@ -118,7 +111,6 @@ export const DonationCard = ({
         </Typography>
       </Box>
 
-      {/* Цитата / хадис */}
       <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
         «{quote}»
       </Typography>

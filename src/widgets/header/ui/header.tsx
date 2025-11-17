@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles';
 
 interface HeaderProps {
   onHelpClick?: () => void;
+  paymentRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onHelpClick }) => {
