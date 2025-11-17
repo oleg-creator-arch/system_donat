@@ -1,11 +1,6 @@
 import { Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 
-// import { ReactComponent as SpbIcon } from '@/shared/assets/icons/spb.svg';
-// import { ReactComponent as CardIcon } from '@/shared/assets/icons/card.svg';
-// import { ReactComponent as TbankIcon } from '@/shared/assets/icons/tbank.svg';
-// import { ReactComponent as SberpayIcon } from '@/shared/assets/icons/sberpay.svg';
-
 import spbIcon from '@shared/assets/icons/spb.svg';
 import cardIcon from '@shared/assets/icons/card.svg';
 import tbankIcon from '@shared/assets/icons/tbank.svg';

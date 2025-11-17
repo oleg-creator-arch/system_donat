@@ -1,85 +1,99 @@
 import { useEffect, useRef, useState } from 'react';
-import { AppBar, Toolbar, Typography, useMediaQuery } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 export const Header = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // <900px
-  const [isFixed, setIsFixed] = useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const THRESHOLD = 150;
-
-  const lastScrollY = useRef(0);
-  const ticking = useRef(false);
+  const [isStuck, setIsStuck] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!isMobile) {
-      setIsFixed(false);
+      setIsStuck(false);
       return;
     }
 
-    const handleScroll = () => {
-      const currentY = window.scrollY || window.pageYOffset;
+    if (!sentinelRef.current) return;
 
-      if (!ticking.current) {
-        window.requestAnimationFrame(() => {
-          setIsFixed(currentY > THRESHOLD);
-          lastScrollY.current = currentY;
-          ticking.current = false;
-        });
-        ticking.current = true;
-      }
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsStuck(!entry.isIntersecting);
+      },
+      { threshold: 1 },
+    );
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    observer.observe(sentinelRef.current);
+
+    return () => observer.disconnect();
   }, [isMobile]);
 
   return (
-    <AppBar
-      position={isMobile && isFixed ? 'fixed' : 'static'}
-      sx={{
-        top: 0,
-        left: isMobile && isFixed ? 16 : 0, // ← добавляем реальные внешние отступы
-        right: isMobile && isFixed ? 16 : 0, // ← а не padding
-        width: isMobile && isFixed ? 'calc(100% - 32px)' : '100%',
-        borderRadius: '10px',
-        background: isMobile
-          ? isFixed
-            ? '#165039'
-            : 'rgba(255, 255, 255, 0.08)'
-          : 'rgba(255, 255, 255, 0.1)',
-        maxWidth: isMobile ? '100%' : 1055,
-        mx: 'auto',
-        mt: isMobile ? 0 : 2,
-        transition: 'background 300ms ease, box-shadow 300ms ease',
-        zIndex: isMobile && isFixed ? 1300 : 1000,
-        boxShadow: isMobile && isFixed ? '0 4px 18px rgba(0,0,0,0.35)' : 'none',
-      }}
-      elevation={0}
-    >
-      <Toolbar
+    <>
+      {/* Невидимый элемент перед хедером, который сообщает: хедер вышел за экран */}
+      <Box ref={sentinelRef} sx={{ height: 1 }} />
+
+      <AppBar
+        position={isMobile ? 'sticky' : 'static'} // ← КЛЮЧ: sticky НЕ ломает layout
         sx={{
-          justifyContent: 'center',
-          py: { xs: 0.5, sm: 1 },
-          minHeight: { xs: 48, sm: 56, md: 64 },
-          px: { xs: 2, sm: 3 }, // ← внутренние отступы контента
+          top: 0,
+          background: 'transparent',
+          boxShadow: 'none',
+          zIndex: 1200,
         }}
+        elevation={0}
       >
-        <Typography
-          variant="h6"
+        {/* Внутренний слой — анимации только здесь */}
+        <Box
           sx={{
-            flexGrow: 1,
-            textAlign: 'center',
-            color: '#f8fafc',
-            fontWeight: 600,
-            letterSpacing: '0.05em',
-            fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
+            background: isMobile
+              ? isStuck
+                ? 'rgba(255, 255, 255, 0.12)' // ← плотный «мутный»
+                : 'rgba(255,255,255,0.12)' // ← прозрачный
+              : 'rgba(255,255,255,0.15)',
+            backdropFilter: isMobile && isStuck ? 'blur(25px)' : 'none',
+            WebkitBackdropFilter: isMobile && isStuck ? 'blur(25px)' : 'none',
+            borderRadius: '10px',
+            boxShadow: isMobile && isStuck ? '0 6px 18px rgba(0,0,0,0.35)' : 'none',
+            // transform: isMobile && !isStuck ? 'translateY(-14px)' : 'translateY(0)',
+            opacity: isMobile && !isStuck ? 0.85 : 1,
+
+            transition: `
+              transform 280ms ease,
+              opacity 280ms ease,
+              background 250ms ease,
+              box-shadow 250ms ease
+            `,
+
+            // mx: isMobile && isStuck ? '16px' : 0,
           }}
         >
-          Мечеть «Ихляс»
-        </Typography>
-      </Toolbar>
-    </AppBar>
+          <Toolbar
+            sx={{
+              justifyContent: 'center',
+              py: { xs: 0.5, sm: 1 },
+              minHeight: { xs: 48, sm: 56, md: 64 },
+              maxHeight: { xs: 48, sm: 56, md: 64 },
+              px: { xs: 2, sm: 3 },
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                flexGrow: 1,
+                textAlign: 'center',
+                color: '#f8fafc',
+                fontWeight: 600,
+                letterSpacing: '0.05em',
+                fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
+              }}
+            >
+              Мечеть «Ихляс»
+            </Typography>
+          </Toolbar>
+        </Box>
+      </AppBar>
+    </>
   );
 };
