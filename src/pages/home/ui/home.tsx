@@ -3,8 +3,14 @@ import './home.scss';
 import { DonationCard } from '@/widgets/donation';
 import { Expenses } from '@/widgets/expenses';
 import { Payment } from '@/widgets/payment';
+import { useOutletContext } from 'react-router-dom';
+
+interface HomeContext {
+  paymentRef: React.RefObject<HTMLDivElement>;
+}
 
 export const Home = () => {
+  const { paymentRef } = useOutletContext<HomeContext>();
   return (
     <Grid container spacing={2} sx={{ overflow: 'unset' }}>
       <Grid size={{ xs: 12, md: 7 }}>
@@ -24,10 +30,17 @@ export const Home = () => {
           <Expenses />
           <Expenses />
           <Expenses />
+          <Expenses />
+          <Expenses />
+          <Expenses />
+          <Expenses />
+          <Expenses />
+          <Expenses />
         </Stack>
       </Grid>
       <Grid size={{ xs: 12, md: 5 }}>
         <Box
+          ref={paymentRef}
           sx={{
             position: 'sticky',
             top: 20,

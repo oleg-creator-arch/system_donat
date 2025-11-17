@@ -1,8 +1,15 @@
 import { Header } from '@/widgets/header';
 import { Box, Container } from '@mui/material';
+import { useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 
 export const Layout = () => {
+  const paymentRef = useRef<HTMLDivElement | null>(null);
+
+  const handleHelpClick = () => {
+    paymentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <Box
       sx={{
@@ -64,14 +71,14 @@ export const Layout = () => {
           py: 2,
         }}
       >
-        <Header />
+        <Header onHelpClick={handleHelpClick} />
         <Container
           sx={{
             mt: 4,
           }}
           disableGutters
         >
-          <Outlet />
+          <Outlet context={{ paymentRef }} />
         </Container>
       </Box>
     </Box>
