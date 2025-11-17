@@ -56,7 +56,6 @@ export const Header = () => {
             WebkitBackdropFilter: isMobile && isStuck ? 'blur(25px)' : 'none',
             borderRadius: '10px',
             boxShadow: isMobile && isStuck ? '0 6px 18px rgba(0,0,0,0.35)' : 'none',
-            // transform: isMobile && !isStuck ? 'translateY(-14px)' : 'translateY(0)',
             opacity: isMobile && !isStuck ? 0.85 : 1,
 
             transition: `
@@ -65,8 +64,6 @@ export const Header = () => {
               background 250ms ease,
               box-shadow 250ms ease
             `,
-
-            // mx: isMobile && isStuck ? '16px' : 0,
           }}
         >
           <Toolbar

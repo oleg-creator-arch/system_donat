@@ -24,6 +24,7 @@ export const Expenses = () => {
       component={Paper}
       sx={{
         position: 'relative',
+        overflowX: 'hidden',
         p: 3,
         color: '#f8fafc',
         mx: 'auto',
@@ -46,9 +47,13 @@ export const Expenses = () => {
       >
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: 600, color: '#4ade80' }}>№</TableCell>
+            <TableCell sx={{ fontWeight: 600, color: '#4ade80', whiteSpace: 'nowrap' }}>
+              №
+            </TableCell>
             <TableCell sx={{ fontWeight: 600, color: '#4ade80' }}>Статья расходов</TableCell>
-            <TableCell sx={{ fontWeight: 600, color: '#4ade80' }} align="right">
+            <TableCell
+              sx={{ fontWeight: 600, color: '#4ade80', textAlign: 'right', whiteSpace: 'nowrap' }}
+            >
               Сумма (₽)
             </TableCell>
           </TableRow>
@@ -57,20 +62,30 @@ export const Expenses = () => {
         <TableBody>
           {rows.map(row => (
             <TableRow key={row.id}>
-              <TableCell sx={{ color: '#ffffff' }}>{row.id}</TableCell>
-              <TableCell sx={{ color: '#ffffff' }}>{row.item}</TableCell>
-              <TableCell align="right" sx={{ color: '#ffffff' }}>
-                {row.cost.toLocaleString('ru-RU')}
+              <TableCell sx={{ color: '#ffffff', whiteSpace: 'nowrap' }}>{row.id}</TableCell>
+              <TableCell
+                sx={{
+                  color: '#ffffff',
+                  wordBreak: 'normal', // слова не ломаются
+                  overflowWrap: 'break-word', // перенос по словам, если не помещается
+                }}
+              >
+                {row.item}
+              </TableCell>
+              <TableCell align="right" sx={{ color: '#ffffff', whiteSpace: 'nowrap' }}>
+                {row.cost.toLocaleString('ru-RU')} ₽
               </TableCell>
             </TableRow>
           ))}
 
-          {/* Итоговая строка */}
           <TableRow>
-            <TableCell colSpan={2} sx={{ fontWeight: 600, color: '#4ade80' }}>
+            <TableCell colSpan={2} sx={{ fontWeight: 600, color: '#4ade80', whiteSpace: 'nowrap' }}>
               Итого:
             </TableCell>
-            <TableCell align="right" sx={{ fontWeight: 600, color: '#4ade80' }}>
+            <TableCell
+              align="right"
+              sx={{ fontWeight: 600, color: '#4ade80', whiteSpace: 'nowrap' }}
+            >
               {total.toLocaleString('ru-RU')} ₽
             </TableCell>
           </TableRow>
