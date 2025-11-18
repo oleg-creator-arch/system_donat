@@ -1,17 +1,6 @@
 import { Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-
-import spbIcon from '@shared/assets/icons/spb.svg';
-import cardIcon from '@shared/assets/icons/card.svg';
-import tbankIcon from '@shared/assets/icons/tbank.svg';
-import sberpayIcon from '@shared/assets/icons/sberpay.svg';
-
-const paymentMethods = [
-  { id: 'spb', label: 'Через СБП', icon: spbIcon },
-  { id: 'card', label: 'Картой онлайн', icon: cardIcon },
-  { id: 'tbank', label: 'T-Pay', icon: tbankIcon },
-  { id: 'sberpay', label: 'SberPay', icon: sberpayIcon },
-];
+import { paymentMethods } from '../lib/make-pay';
 
 export const Payment = () => {
   const [selected, setSelected] = useState('spb');
@@ -84,7 +73,6 @@ export const Payment = () => {
           Выберите способ оплаты
         </Typography>
 
-        {/* Варианты оплаты */}
         <Grid
           container
           spacing={2}
@@ -145,7 +133,6 @@ export const Payment = () => {
           ))}
         </Grid>
 
-        {/* Поле для ввода суммы */}
         <TextField
           fullWidth
           variant="standard"
@@ -182,7 +169,6 @@ export const Payment = () => {
           }}
         />
 
-        {/* Кнопка пожертвования */}
         <Button
           fullWidth
           variant="contained"
