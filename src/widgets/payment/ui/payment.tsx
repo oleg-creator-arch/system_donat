@@ -1,11 +1,13 @@
 import { Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { paymentMethods } from '../lib/make-pay';
+import { api } from '@/shared/api/api';
 
 export const Payment = () => {
-  const [selected, setSelected] = useState('spb');
+  const [selected, setSelected] = useState('sbp');
   const [amount, setAmount] = useState('');
   const [isError, setIsError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const validateAmount = (value: string) => {
     const num = Number(value.replace(/\s|₽/g, ''));
@@ -44,6 +46,35 @@ export const Payment = () => {
       e.preventDefault();
     }
   };
+
+  const handlePayment = async () => {
+    const numericAmount = Number(amount.replace(/\s|₽/g, ''));
+    if (isError || !numericAmount) return;
+
+    try {
+      setLoading(true);
+
+      const res = await api.post('/payments', {
+        amount: numericAmount,
+        paymentMethod: selected,
+      });
+
+      console.log('Server response:', res.data);
+
+      const url = res.data?.paymentUrl;
+
+      if (url) {
+        window.location.href = url;
+      } else {
+        alert('Ссылка на оплату не найдена');
+      }
+    } catch (err) {
+      alert('Ошибка при создании платежа');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -187,7 +218,7 @@ export const Payment = () => {
               '100%': { boxShadow: '0 0 0 0 rgba(76, 175, 80, 0)' },
             },
           }}
-          onClick={() => alert(`Вы выбрали ${selected}, сумма ${amount || 0}₽`)}
+          onClick={handlePayment}
         >
           Внести свой вклад
         </Button>
