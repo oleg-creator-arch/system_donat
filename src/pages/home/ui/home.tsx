@@ -21,8 +21,6 @@ export const Home = () => {
         <Stack spacing={2}>
           <DonationCard
             title="Ежемесячное обслуживание мечети «Ихляс»"
-            goal={328000}
-            collected={328000}
             quote="Милостыня стирает грехи так же, как вода гасит огонь"
             reference="Хадис передал ат-Тирмизи"
           />

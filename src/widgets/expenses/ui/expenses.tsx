@@ -39,7 +39,8 @@ export const Expenses = () => {
           cost: e.amount,
         }));
         setRows(mapped);
-      } catch {
+      } catch (err) {
+        console.error(err);
         alert('Ошибка загрузки расходов');
       } finally {
         setLoading(false);

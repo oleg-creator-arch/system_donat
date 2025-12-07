@@ -1,23 +1,36 @@
+import { useEffect, useState } from 'react';
 import { Box, Typography, LinearProgress, Chip } from '@mui/material';
+import { api } from '@/shared/api/api';
 
 interface DonationCardProps {
   title: string;
-  goal: number;
-  collected: number;
   quote: string;
   reference: string;
-  currency?: string;
 }
 
-export const DonationCard = ({
-  title,
-  goal,
-  collected,
-  quote,
-  reference,
-  currency = '₽',
-}: DonationCardProps) => {
-  const progress = Math.min((collected / goal) * 100, 100);
+export const DonationCard = ({ title, quote, reference }: DonationCardProps) => {
+  const [collected, setCollected] = useState(0);
+  const [expenses, setExpenses] = useState(0);
+  const currency = '₽';
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await api.get<{ collected: number; expenses: number }>('/payments');
+
+        setCollected(res.data.collected);
+        setExpenses(res.data.expenses);
+      } catch (err) {
+        console.error('Ошибка загрузки статистики:', err);
+      }
+    };
+
+    load();
+  }, []);
+
+  const goal = expenses;
+  const remaining = Math.max(goal - collected, 0);
+  const progress = goal > 0 ? Math.min((collected / goal) * 100, 100) : 0;
 
   return (
     <Box
@@ -39,22 +52,15 @@ export const DonationCard = ({
         {title}
       </Typography>
 
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          mb: 1,
-        }}
-      >
-        <Chip label="ЦЕЛЬ на месяц" color="success" size="small" sx={{ mr: 1, fontWeight: 600 }} />
-
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+        <Chip label="Цель расходов" color="success" size="small" sx={{ mr: 1, fontWeight: 600 }} />
         <Typography variant="body1" sx={{ fontWeight: 600 }}>
           {goal.toLocaleString()} {currency}
         </Typography>
       </Box>
 
       <Typography variant="h4" sx={{ fontWeight: 700, color: '#4ade80', mb: 2 }}>
-        {goal - collected} {currency} Осталось собрать
+        {remaining.toLocaleString()} {currency} Осталось собрать
       </Typography>
 
       <Box sx={{ position: 'relative', width: '100%', mt: 2 }}>
@@ -71,7 +77,6 @@ export const DonationCard = ({
             },
           }}
         />
-
         <Box
           sx={{
             position: 'absolute',
@@ -79,7 +84,7 @@ export const DonationCard = ({
             minWidth: '28px',
             height: '28px',
             lineHeight: '28px',
-            color: 'var(--text-btn, #fff)',
+            color: '#fff',
             fontSize: '10px',
             fontWeight: 'bold',
             textAlign: 'center',
@@ -104,14 +109,14 @@ export const DonationCard = ({
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
         <Typography variant="body2" sx={{ fontWeight: 600 }}>
-          {collected.toLocaleString()} {currency}
+          Собрано: {collected.toLocaleString()} {currency}
         </Typography>
         <Typography variant="body2" sx={{ fontWeight: 600 }}>
-          {goal.toLocaleString()} {currency}
+          Расходы: {expenses.toLocaleString()} {currency}
         </Typography>
       </Box>
 
-      <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+      <Typography variant="body2" sx={{ fontStyle: 'italic', mt: 1 }}>
         «{quote}»
       </Typography>
       <Typography variant="caption" sx={{ display: 'block', mt: 0.5 }}>

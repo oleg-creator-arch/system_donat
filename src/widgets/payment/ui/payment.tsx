@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { paymentMethods } from '../lib/make-pay';
 import { api } from '@/shared/api/api';
@@ -101,7 +101,7 @@ export const Payment = () => {
             letterSpacing: '0.05em',
           }}
         >
-          Выберите способ оплаты
+          Выберите способ перевода
         </Typography>
 
         <Grid
@@ -219,8 +219,9 @@ export const Payment = () => {
             },
           }}
           onClick={handlePayment}
+          disabled={loading}
         >
-          Внести свой вклад
+          {loading ? 'Обрабатываем…' : 'Внести свой вклад'}
         </Button>
       </Stack>
     </Box>
