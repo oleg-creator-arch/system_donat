@@ -2,6 +2,7 @@ import { Box, Container } from '@mui/material';
 import { useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from '@/widgets/header';
+import { Contact } from '@/widgets/contact';
 
 export const Layout = () => {
   const paymentRef = useRef<HTMLDivElement | null>(null);
@@ -55,6 +56,8 @@ export const Layout = () => {
           <Outlet context={{ paymentRef }} />
         </Container>
       </Box>
+
+      <Contact />
     </Box>
   );
 };

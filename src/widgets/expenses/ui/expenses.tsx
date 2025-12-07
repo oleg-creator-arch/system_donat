@@ -1,3 +1,4 @@
+import { api } from '@/shared/api/api';
 import {
   Table,
   TableBody,
@@ -6,18 +7,56 @@ import {
   TableRow,
   TableCell,
   Paper,
+  Box,
+  CircularProgress,
 } from '@mui/material';
+import { useEffect, useState } from 'react';
 
-const rows = [
-  { id: 1, item: 'Аренда помещения', cost: 50000 },
-  { id: 2, item: 'Зарплата персонала', cost: 120000 },
-  { id: 3, item: 'Реклама и маркетинг', cost: 30000 },
-  { id: 4, item: 'Закупка оборудования', cost: 80000 },
-  { id: 5, item: 'Коммунальные услуги', cost: 15000 },
-];
+interface Expense {
+  id: number;
+  item: string;
+  cost: number;
+}
+
+interface ServerExpense {
+  id: number;
+  title: string;
+  amount: number;
+  createdAt: string;
+}
 
 export const Expenses = () => {
+  const [rows, setRows] = useState<Expense[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await api.get('/expenses');
+        const mapped: Expense[] = res.data.map((e: ServerExpense) => ({
+          id: e.id,
+          item: e.title,
+          cost: e.amount,
+        }));
+        setRows(mapped);
+      } catch {
+        alert('Ошибка загрузки расходов');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+  }, []);
+
   const total = rows.reduce((sum, row) => sum + row.cost, 0);
+
+  if (loading)
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
+        <CircularProgress color="success" />
+      </Box>
+    );
 
   return (
     <TableContainer

@@ -34,8 +34,6 @@ export const Home = () => {
           )}
 
           <Expenses />
-
-          <Contact />
         </Stack>
       </Grid>
 
