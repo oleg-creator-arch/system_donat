@@ -4,6 +4,7 @@ import { DonationCard } from '@/widgets/donation';
 import { Expenses } from '@/widgets/expenses';
 import { Payment } from '@/widgets/payment';
 import { useOutletContext } from 'react-router-dom';
+import { Contact } from '@/widgets/contact';
 
 interface HomeContext {
   paymentRef: React.RefObject<HTMLDivElement>;
@@ -33,6 +34,8 @@ export const Home = () => {
           )}
 
           <Expenses />
+
+          <Contact />
         </Stack>
       </Grid>
 
