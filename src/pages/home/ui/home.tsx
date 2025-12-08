@@ -5,6 +5,7 @@ import { Expenses } from '@/widgets/expenses';
 import { Payment } from '@/widgets/payment';
 import { useOutletContext } from 'react-router-dom';
 import { Contact } from '@/widgets/contact';
+import { PaymentDev } from '@/widgets/paymentDev';
 
 interface HomeContext {
   paymentRef: React.RefObject<HTMLDivElement>;
@@ -32,6 +33,9 @@ export const Home = () => {
           )}
 
           <Expenses />
+
+          <Contact />
+          {isMobile && <PaymentDev />}
         </Stack>
       </Grid>
 
@@ -44,7 +48,10 @@ export const Home = () => {
               top: 20,
             }}
           >
-            <Payment />
+            <Stack spacing={2}>
+              <Payment />
+              <PaymentDev />
+            </Stack>
           </Box>
         </Grid>
       )}

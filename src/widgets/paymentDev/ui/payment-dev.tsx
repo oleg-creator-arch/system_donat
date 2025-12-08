@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { paymentMethods } from '../lib/make-pay';
 import { api } from '@/shared/api/api';
 
-export const Payment = () => {
+export const PaymentDev = () => {
   const [selected, setSelected] = useState('sbp');
   const [amount, setAmount] = useState('');
   const [isError, setIsError] = useState(false);
@@ -54,7 +54,7 @@ export const Payment = () => {
     try {
       setLoading(true);
 
-      const res = await api.post('/payments', {
+      const res = await api.post('/payments-dev', {
         amount: numericAmount,
         paymentMethod: selected,
       });
@@ -101,7 +101,7 @@ export const Payment = () => {
             letterSpacing: '0.05em',
           }}
         >
-          Выберите способ перевода
+          Поддержите разработку — ваш вклад помогает проекту развиваться.
         </Typography>
 
         <Grid
