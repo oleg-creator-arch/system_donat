@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import '@fontsource/montserrat/400.css';
 import '@fontsource/montserrat/700.css';
 import { CssBaseline } from '@mui/material';
+import { SnackbarProvider } from 'notistack';
 
 const theme = createTheme({
   typography: {
@@ -16,7 +17,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <App />
+      </SnackbarProvider>
     </ThemeProvider>
   </StrictMode>,
 );

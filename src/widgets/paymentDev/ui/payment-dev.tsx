@@ -2,12 +2,15 @@ import { Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { paymentMethods } from '../lib/make-pay';
 import { api } from '@/shared/api/api';
+import { useSnackbar } from 'notistack';
 
 export const PaymentDev = () => {
   const [selected, setSelected] = useState('sbp');
   const [amount, setAmount] = useState('');
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const validateAmount = (value: string) => {
     const num = Number(value.replace(/\s|₽/g, ''));
@@ -66,10 +69,10 @@ export const PaymentDev = () => {
       if (url) {
         window.location.href = url;
       } else {
-        alert('Ссылка на оплату не найдена');
+        enqueueSnackbar('Ссылка на оплату не найдена', { variant: 'error' });
       }
     } catch (err) {
-      alert('Ошибка при создании платежа');
+      enqueueSnackbar('Ошибка при создании платежа', { variant: 'error' });
     } finally {
       setLoading(false);
     }

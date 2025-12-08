@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography, LinearProgress, Chip } from '@mui/material';
 import { api } from '@/shared/api/api';
+import { useSnackbar } from 'notistack';
 
 interface DonationCardProps {
   title: string;
@@ -12,6 +13,7 @@ export const DonationCard = ({ title, quote, reference }: DonationCardProps) => 
   const [collected, setCollected] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const currency = '₽';
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const load = async () => {
@@ -21,7 +23,7 @@ export const DonationCard = ({ title, quote, reference }: DonationCardProps) => 
         setCollected(res.data.collected);
         setExpenses(res.data.expenses);
       } catch (err) {
-        console.error('Ошибка загрузки статистики:', err);
+        enqueueSnackbar('Ошибка загрузки статистики', { variant: 'error' });
       }
     };
 

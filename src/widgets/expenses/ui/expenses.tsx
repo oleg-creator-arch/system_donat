@@ -10,6 +10,7 @@ import {
   Box,
   CircularProgress,
 } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 
 interface Expense {
@@ -28,6 +29,7 @@ interface ServerExpense {
 export const Expenses = () => {
   const [rows, setRows] = useState<Expense[]>([]);
   const [loading, setLoading] = useState(true);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const load = async () => {
@@ -40,8 +42,7 @@ export const Expenses = () => {
         }));
         setRows(mapped);
       } catch (err) {
-        console.error(err);
-        alert('Ошибка загрузки расходов');
+        enqueueSnackbar('Ошибка загрузки расходов', { variant: 'error' });
       } finally {
         setLoading(false);
       }
