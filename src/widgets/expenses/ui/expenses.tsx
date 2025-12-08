@@ -100,9 +100,9 @@ export const Expenses = () => {
         </TableHead>
 
         <TableBody>
-          {rows.map(row => (
+          {rows.map((row, index) => (
             <TableRow key={row.id}>
-              <TableCell sx={{ color: '#ffffff', whiteSpace: 'nowrap' }}>{row.id}</TableCell>
+              <TableCell sx={{ color: '#ffffff', whiteSpace: 'nowrap' }}>{index + 1}</TableCell>
               <TableCell
                 sx={{
                   color: '#ffffff',
