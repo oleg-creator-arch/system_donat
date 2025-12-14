@@ -1,24 +1,21 @@
-import { Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { paymentMethods } from '../lib/make-pay';
 import { api } from '@/shared/api/api';
 import { useSnackbar } from 'notistack';
 
 export const Payment = () => {
-  const [selected, setSelected] = useState('sbp');
+  const [selected, setSelected] = useState('bank_card');
   const [amount, setAmount] = useState('');
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const DEMO_MODE = true;
+  const DEMO_ENABLED_METHOD = 'bank_card';
   const { enqueueSnackbar } = useSnackbar();
 
   const validateAmount = (value: string) => {
     const num = Number(value.replace(/\s|₽/g, ''));
-    if (!num || num < 10) {
-      setIsError(true);
-    } else {
-      setIsError(false);
-    }
+    setIsError(Number.isNaN(num) || num < 10);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,11 +29,12 @@ export const Payment = () => {
     const num = Number(inputValue);
     const formatted = num.toLocaleString('ru-RU');
     setAmount(`${formatted} ₽`);
-    validateAmount(formatted);
+    validateAmount(inputValue);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace') {
+      e.preventDefault();
       const digits = amount.replace(/[^\d]/g, '').slice(0, -1);
       if (digits) {
         const formatted = Number(digits).toLocaleString('ru-RU');
@@ -46,14 +44,29 @@ export const Payment = () => {
         setAmount('');
         setIsError(true);
       }
-      e.preventDefault();
     }
+  };
+
+  const handleSelectMethod = (id: string) => {
+    if (DEMO_MODE && id !== DEMO_ENABLED_METHOD) {
+      enqueueSnackbar('Сайт работает в демо-режиме. Доступна только оплата картой.', {
+        variant: 'info',
+      });
+      return;
+    }
+
+    setSelected(id);
   };
 
   const handlePayment = async () => {
     const numericAmount = Number(amount.replace(/\s|₽/g, ''));
 
     if (isError || !numericAmount) return;
+
+    if (DEMO_MODE) {
+      enqueueSnackbar('Демо-режим: платёж не будет выполнен', { variant: 'warning' });
+      return;
+    }
 
     try {
       setLoading(true);
@@ -95,6 +108,9 @@ export const Payment = () => {
         },
       }}
     >
+      {DEMO_MODE && (
+        <Alert severity="info">Сайт работает в демо-режиме. Доступна только оплата картой.</Alert>
+      )}
       <Stack spacing={2}>
         <Typography
           variant="h6"
@@ -118,60 +134,41 @@ export const Payment = () => {
             justifyContent: { xs: 'center', md: 'flex-start' },
           }}
         >
-          {paymentMethods.map(method => (
-            <Grid key={method.id} size={{ xs: 12, sm: 6, md: 6 }}>
-              <Box
-                onClick={() => setSelected(method.id)}
-                sx={{
-                  cursor: 'pointer',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: { xs: 'row', md: 'column' },
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: { xs: 1, md: 0 },
-                  p: { xs: 1, md: 2 },
-                  borderRadius: 2,
-                  background:
-                    selected === method.id
-                      ? 'rgba(255, 255, 255, 0.25)'
-                      : 'rgba(255, 255, 255, 0.05)',
-                  border:
-                    selected === method.id
-                      ? '1px solid rgba(255,255,255,0.3)'
-                      : '1px solid rgba(255,255,255,0.1)',
-                  transition: 'all 0.2s ease',
-                  '&:hover': {
-                    background: 'rgba(255,255,255,0.2)',
-                  },
-                }}
-              >
+          {paymentMethods.map(method => {
+            const isDisabled = DEMO_MODE && method.id !== DEMO_ENABLED_METHOD;
+            return (
+              <Grid key={method.id} size={{ xs: 12, sm: 6, md: 6 }}>
                 <Box
-                  component="img"
-                  src={method.icon}
-                  alt={method.label}
+                  onClick={() => handleSelectMethod(method.id)}
                   sx={{
-                    width: 40,
-                    height: 40,
-                    mb: { md: 1, xs: 0 },
+                    cursor: isDisabled ? 'not-allowed' : 'pointer',
+                    opacity: isDisabled ? 0.4 : 1,
+                    p: 2,
+                    textAlign: 'center',
+                    borderRadius: 2,
+                    border:
+                      selected === method.id
+                        ? '1px solid #4caf50'
+                        : '1px solid rgba(255,255,255,0.2)',
                   }}
-                />
-                <Typography
-                  fontWeight={500}
-                  fontSize={{ xs: '0.9rem', md: '1rem' }}
-                  sx={{ whiteSpace: 'nowrap' }}
                 >
-                  {method.label}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
+                  <Box
+                    component="img"
+                    src={method.icon}
+                    alt={method.label}
+                    sx={{ width: 40, height: 40, mb: 1 }}
+                  />
+                  <Typography>{method.label}</Typography>
+                </Box>
+              </Grid>
+            );
+          })}
         </Grid>
 
         <TextField
           fullWidth
           variant="standard"
-          label="Cумма пожертвования"
+          label="Сумма пожертвования"
           placeholder="100 ₽"
           value={amount}
           onChange={handleChange}

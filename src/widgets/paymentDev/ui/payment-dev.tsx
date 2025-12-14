@@ -1,11 +1,12 @@
-import { Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { paymentMethods } from '../lib/make-pay';
 import { api } from '@/shared/api/api';
 import { useSnackbar } from 'notistack';
 
 export const PaymentDev = () => {
-  const [selected, setSelected] = useState('sbp');
+  const DEMO_MODE = true;
+  const [selected, setSelected] = useState<string | null>(null);
   const [amount, setAmount] = useState('');
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -51,31 +52,9 @@ export const PaymentDev = () => {
   };
 
   const handlePayment = async () => {
-    const numericAmount = Number(amount.replace(/\s|₽/g, ''));
-    if (isError || !numericAmount) return;
-
-    try {
-      setLoading(true);
-
-      const res = await api.post('/payments-dev', {
-        amount: numericAmount,
-        paymentMethod: selected,
-      });
-
-      console.log('Server response:', res.data);
-
-      const url = res.data?.paymentUrl;
-
-      if (url) {
-        window.location.href = url;
-      } else {
-        enqueueSnackbar('Ссылка на оплату не найдена', { variant: 'error' });
-      }
-    } catch (err) {
-      enqueueSnackbar('Ошибка при создании платежа', { variant: 'error' });
-    } finally {
-      setLoading(false);
-    }
+    enqueueSnackbar('Сайт работает в демо-режиме. Оплата временно недоступна.', {
+      variant: 'info',
+    });
   };
 
   return (
@@ -95,6 +74,10 @@ export const PaymentDev = () => {
       }}
     >
       <Stack spacing={2}>
+        <Alert severity="info">
+          Сайт работает в демо-режиме. Все способы оплаты временно отключены.
+        </Alert>
+
         <Typography
           variant="h6"
           sx={{
@@ -120,48 +103,22 @@ export const PaymentDev = () => {
           {paymentMethods.map(method => (
             <Grid key={method.id} size={{ xs: 12, sm: 6, md: 6 }}>
               <Box
-                onClick={() => setSelected(method.id)}
                 sx={{
-                  cursor: 'pointer',
+                  cursor: 'not-allowed',
+                  opacity: 0.4,
+                  p: 2,
                   textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: { xs: 'row', md: 'column' },
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: { xs: 1, md: 0 },
-                  p: { xs: 1, md: 2 },
                   borderRadius: 2,
-                  background:
-                    selected === method.id
-                      ? 'rgba(255, 255, 255, 0.25)'
-                      : 'rgba(255, 255, 255, 0.05)',
-                  border:
-                    selected === method.id
-                      ? '1px solid rgba(255,255,255,0.3)'
-                      : '1px solid rgba(255,255,255,0.1)',
-                  transition: 'all 0.2s ease',
-                  '&:hover': {
-                    background: 'rgba(255,255,255,0.2)',
-                  },
+                  border: '1px solid rgba(255,255,255,0.2)',
                 }}
               >
                 <Box
                   component="img"
                   src={method.icon}
                   alt={method.label}
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    mb: { md: 1, xs: 0 },
-                  }}
+                  sx={{ width: 40, height: 40, mb: 1 }}
                 />
-                <Typography
-                  fontWeight={500}
-                  fontSize={{ xs: '0.9rem', md: '1rem' }}
-                  sx={{ whiteSpace: 'nowrap' }}
-                >
-                  {method.label}
-                </Typography>
+                <Typography>{method.label}</Typography>
               </Box>
             </Grid>
           ))}
