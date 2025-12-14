@@ -5,11 +5,9 @@ import { api } from '@/shared/api/api';
 import { useSnackbar } from 'notistack';
 
 export const PaymentDev = () => {
-  const DEMO_MODE = true;
-  const [selected, setSelected] = useState<string | null>(null);
   const [amount, setAmount] = useState('');
   const [isError, setIsError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   const { enqueueSnackbar } = useSnackbar();
 
