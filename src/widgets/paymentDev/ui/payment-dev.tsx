@@ -1,7 +1,6 @@
 import { Alert, Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { paymentMethods } from '../lib/make-pay';
-import { api } from '@/shared/api/api';
 import { useSnackbar } from 'notistack';
 
 export const PaymentDev = () => {
